@@ -12,6 +12,7 @@ namespace dbms_core
     class Engine
     {
         Database database;
+        StorageManager storageManager = new StorageManager();
 
         Table currentTable;
         Table intersectionTable = new Table();
@@ -27,7 +28,7 @@ namespace dbms_core
 
             database = new Database(dbName, databasePath, directoryPath);
 
-            SerialiseDatabase(database);
+            storageManager.SerialiseDatabase(database);
             //var json = JsonSerializer.Serialize(database);
             //File.WriteAllText(database.DatabasePath, json);
             //return database;
@@ -36,13 +37,13 @@ namespace dbms_core
         public void SetServerDatabase(string dbName)
         {
             string dbPath = constants.path + dbName + constants.backSlash + dbName + constants.databaseExtension;
-            database = GetDatabaseFromPath(dbPath);
+            database = storageManager.GetDatabaseFromPath(dbPath);
         }
 
         public void SetServerTable(string tableName)
         {
             string tablePath = constants.path + database.DatabaseName + constants.backSlash + tableName + constants.tableExtension;
-            GetSelectedTable(tablePath);
+            currentTable = storageManager.GetSelectedTable(tablePath);
         }
 
         public void SetIntersectionTable(string tableName)
@@ -64,8 +65,8 @@ namespace dbms_core
             database.AddTable(table);
 
 
-            SerialiseTable(table);
-            SerialiseDatabase(database);
+            storageManager.SerialiseTable(table);
+            storageManager.SerialiseDatabase(database);
         }
 
         public void DeleteTableFromName(string tableName)
@@ -76,7 +77,7 @@ namespace dbms_core
              
             database.Tables.RemoveAll(t => t.TableName == tableName);
 
-            SerialiseDatabase(database);
+            storageManager.SerialiseDatabase(database);
         }
 
         public void DeleteTableAtIndex(int index)
@@ -85,7 +86,7 @@ namespace dbms_core
 
             database.Tables.RemoveAt(index);
 
-            SerialiseDatabase(database);
+            storageManager.SerialiseDatabase(database);
 
             //var jsonDatabase = JsonSerializer.Serialize(database);
             //File.WriteAllText(database.DatabasePath, jsonDatabase);
@@ -108,7 +109,7 @@ namespace dbms_core
                 currentTable.columns.Add(column);
             }
 
-            SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable);
 
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
@@ -116,17 +117,17 @@ namespace dbms_core
             //return column;
         }
 
-        public Table GetSelectedTable(string name)
-        {
-            currentTable = JsonSerializer.Deserialize<Table>(File.ReadAllText(name));
-            return currentTable;
-        }
+        //public Table GetSelectedTable(string name)
+        //{
+        //    currentTable = JsonSerializer.Deserialize<Table>(File.ReadAllText(name));
+        //    return currentTable;
+        //}
 
         public Database GetDatabaseFromPath(string path)
         {
             database = JsonSerializer.Deserialize<Database>(File.ReadAllText(path));
 
-            SerialiseDatabase(database);
+            storageManager.SerialiseDatabase(database);
 
             //var jsonDatabase = JsonSerializer.Serialize(database);
             //File.WriteAllText(database.DatabasePath, jsonDatabase);
@@ -183,11 +184,11 @@ namespace dbms_core
             //var jsonTable = JsonSerializer.Serialize(intersectionTable);
             //File.WriteAllText(intersectionTable.TablePath, jsonTable);
 
-            SerialiseTable(intersectionTable);
+            storageManager.SerialiseTable(intersectionTable);
 
             database.AddTable(intersectionTable);
 
-            SerialiseDatabase(database);
+            storageManager.SerialiseDatabase(database);
             //var jsonDatabase = JsonSerializer.Serialize(database);
             //File.WriteAllText(database.DatabasePath, jsonDatabase);
 
@@ -242,7 +243,7 @@ namespace dbms_core
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
 
-            SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable);
 
             return currentTable.columns.Count();
         }
@@ -279,7 +280,7 @@ namespace dbms_core
         {
             currentTable.RowsList.Add(row);
 
-            SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable);
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
         }
@@ -302,7 +303,7 @@ namespace dbms_core
         {
             currentTable.RowsList.Add(cellList);
 
-            SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable);
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
         }
@@ -327,17 +328,17 @@ namespace dbms_core
             }
         }
 
-        public void SerialiseDatabase(Database database)
-        {
-            var json = JsonSerializer.Serialize(database);
-            File.WriteAllText(database.DatabasePath, json);
-        }
+        //public void SerialiseDatabase(Database database)
+        //{
+        //    var json = JsonSerializer.Serialize(database);
+        //    File.WriteAllText(database.DatabasePath, json);
+        //}
 
-        public void SerialiseTable(Table table)
-        {
-            var json = JsonSerializer.Serialize(table);
-            File.WriteAllText(table.TablePath, json);
-        }
+        //public void SerialiseTable(Table table)
+        //{
+        //    var json = JsonSerializer.Serialize(table);
+        //    File.WriteAllText(table.TablePath, json);
+        //}
 
 
 
