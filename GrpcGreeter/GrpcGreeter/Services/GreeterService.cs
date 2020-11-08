@@ -90,7 +90,7 @@ namespace GrpcGreeter
         {
             engine.SetServerDatabase(request.DatabaseName);
             
-            engine.SetServerTable(request.TableName);
+            engine.SetServerTable(request.DatabaseName, request.TableName);
 
             engine.CreateColumn(request.ColumnName, request.ColumnType);
 
@@ -116,7 +116,7 @@ namespace GrpcGreeter
         {
             engine.SetServerDatabase(request.DatabaseName);
 
-            engine.SetServerTable(request.TableName);
+            engine.SetServerTable(request.DatabaseName, request.TableName);
 
             engine.AddRowFromClient(request.Value);
 
@@ -140,7 +140,7 @@ namespace GrpcGreeter
         {
             engine.SetServerDatabase(request.DatabaseName);
 
-            engine.SetServerTable(request.TableName);
+            engine.SetServerTable(request.DatabaseName, request.TableName);
 
             string rows = engine.GetRows();
 
@@ -161,7 +161,7 @@ namespace GrpcGreeter
         {
             engine.SetServerDatabase(request.DatabaseName);
 
-            engine.SetServerTable(request.TableName);
+            engine.SetServerTable(request.DatabaseName, request.TableName);
 
             engine.DeleteRow(request.Id);
 
@@ -185,7 +185,7 @@ namespace GrpcGreeter
         {
             engine.SetServerDatabase(request.DatabaseName);
 
-            engine.SetServerTable(request.TableName1);
+            engine.SetServerTable(request.DatabaseName, request.TableName1);
 
             //engine.SetIntersectionTable(request.TableName2);
 
@@ -209,7 +209,7 @@ namespace GrpcGreeter
         {
             engine.SetServerDatabase(request.DatabaseName);
 
-            engine.SetServerTable(request.TableName);
+            engine.SetServerTable(request.DatabaseName, request.TableName);
 
             engine.DeleteTableFromName(request.TableName);
 

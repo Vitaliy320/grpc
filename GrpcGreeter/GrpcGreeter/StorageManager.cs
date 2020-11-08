@@ -9,13 +9,13 @@ namespace dbms_core
 {
     public class StorageManager
     {
-        public Table GetSelectedTable(string name)
+        public Table GetSelectedTable(string dbname, string tablename, string name)
         {
             Table currentTable = JsonSerializer.Deserialize<Table>(File.ReadAllText(name));
             return currentTable;
         }
 
-        public Database GetDatabaseFromPath(string path)
+        public Database GetDatabaseFromPath(string dbname, string path)
         {
             Database database = JsonSerializer.Deserialize<Database>(File.ReadAllText(path));
 
