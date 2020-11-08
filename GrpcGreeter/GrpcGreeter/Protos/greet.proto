@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcGreeter";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+
+  rpc CreateDatabase (DatabaseRequest) returns (DatabaseReply);
+
+  rpc LoadDatabaseFromPath (LoadDatabaseRequest) returns (LoadDatabaseReply);
+
+  rpc CreateTable (CreateTableRequest) returns (CreateTableReply);
+
+  rpc AddColumn (AddColumnRequest) returns (AddColumnReply);
+
+  rpc AddRow (AddRowRequest) returns (AddRowReply);
+
+  rpc EditRow (EditRowRequest) returns (EditRowReply);
+
+  rpc ShowRows (ShowRowsRequest) returns (ShowRowsReply);
+
+  rpc IntersectTables (IntersectTablesRequest) returns (IntersectTablesReply);
+
+  rpc DeleteTable (DeleteTableRequest) returns (DeleteTableReply);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+
+
+message DatabaseRequest{
+	string name = 1;
+	string path = 2;
+}
+
+message DatabaseReply{
+	string databaseName = 1;
+	string databasePath = 2;
+}
+
+message LoadDatabaseRequest{
+	string databaseName = 1;
+	string databasePath = 2;
+}
+
+message LoadDatabaseReply{
+	string databaseName = 1;
+	string databasePath = 2;
+}
+
+message CreateTableRequest{
+	string databaseName = 1;
+	string tableName = 2;
+}
+
+message CreateTableReply{
+	string databaseName = 1;
+	string tableName = 2;
+}
+
+message AddColumnRequest{
+	string databaseName = 1;
+	string tableName = 2;
+	string columnName = 3;
+	string columnType = 4;
+}
+
+message AddColumnReply{
+	string databaseName = 1;
+	string tableName = 2;
+	string columnName = 3;
+	string columnType = 4;
+}
+
+message AddRowRequest{
+	string databaseName = 1;
+	string tableName = 2;
+	string value = 3;
+}
+
+message AddRowReply{
+	string databaseName = 1;
+	string tableName = 2;
+	string value = 3;
+}
+
+message EditRowRequest{
+	string databaseName = 1;
+	string tableName = 2;
+	int32 id = 3;
+	string value = 4;
+}
+
+message EditRowReply{
+	string databaseName = 1;
+	string tableName = 2;
+	int32 id = 3;
+	string value = 4;
+}
+
+message ShowRowsRequest{
+	string databaseName = 1;
+	string tableName = 2;
+	string rows = 3;
+}
+
+message ShowRowsReply{
+	string databaseName = 1;
+	string tableName = 2;
+	string rows = 3;
+}
+
+message IntersectTablesRequest{
+	string tableName1 = 1;
+	string tableName2 = 2;
+	string tablename3 = 3;
+	string databaseName = 4;
+}
+
+message IntersectTablesReply{
+	string tableName1 = 1;
+	string tableName2 = 2;
+	string tablename3 = 3;
+	string databaseName = 4;
+}
+
+message DeleteTableRequest{
+	string databaseName = 1;
+	string tableName = 2;
+}
+
+message DeleteTableReply{
+	string databaseName = 1;
+	string tableName = 2;
+}
