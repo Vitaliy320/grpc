@@ -1,12 +1,11 @@
-﻿using dbms_core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace GrpcGreeter
+namespace dbms_core
 {
     public class StorageManager
     {
