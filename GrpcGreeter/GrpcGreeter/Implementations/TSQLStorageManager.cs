@@ -6,13 +6,23 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace GrpcGreeter
+namespace GrpcGreeter.Implementations
 {
-    public class StorageManager
+    public class TSQLStorageManager : IStorageManager
     {
+
+        private string _server;
+        private string _db;
+        private string _table;
+
+        private string _tableNameForDbTable;
+
+        private string _connectionString =>
+            $"Server={_server};Database={_db};Trusted_Connection=True;Integrated Security=SSPI;MultipleActiveResultSets=true";
+
         public Table GetSelectedTable(string name)
         {
-            Table currentTable = JsonSerializer.Deserialize<Table>(File.ReadAllText(name));
+            Table currentTable = JsonSerializer.Deserialize<Table>();
             return currentTable;
         }
 
@@ -24,7 +34,6 @@ namespace GrpcGreeter
 
             return database;
         }
-
 
         public void SerialiseDatabase(Database database)
         {
