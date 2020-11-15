@@ -8,9 +8,9 @@ namespace GrpcGreeter
 {
     public interface IStorageManager
     {
-        Table GetSelectedTable(string name);
+        Table GetSelectedTable(string dbname, string tablename, string name);
 
-        Database GetDatabaseFromPath(string path);
+        Database GetDatabaseFromPath(string dbname, string path);
 
         void SerialiseDatabase(Database database);
 

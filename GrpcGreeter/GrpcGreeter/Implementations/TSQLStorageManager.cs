@@ -11,31 +11,36 @@ namespace GrpcGreeter.Implementations
     public class TSQLStorageManager : IStorageManager
     {
 
-        private TSQLprovider TSQLprovider;
+        
 
 
 
-        public Table GetSelectedTable(string name)
+        public Table GetSelectedTable(string dbname, string tablename, string name)
         {
-            //Table currentTable = JsonSerializer.Deserialize<Table>();
-            //return currentTable;
-
-            throw new NotImplementedException();
+            TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, dbname, tablename);
+            Table currentTable = JsonSerializer.Deserialize<Table>(TSQLprovider.GetData()[0]);
+            return currentTable;
         }
 
-        public Database GetDatabaseFromPath(string path)
+        public Database GetDatabaseFromPath(string dbname, string path)
         {
-            Database database = JsonSerializer.Deserialize<Database>(File.ReadAllText(path));
 
-            SerialiseDatabase(database);
+
+            TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, dbname);
+            
+
+            Database database = JsonSerializer.Deserialize<Database>(TSQLprovider.GetDb());
+
+            //SerialiseDatabase(database);
 
             return database;
         }
 
         public void SerialiseDatabase(Database database)
         {
+            TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, database.DatabaseName);
             var json = JsonSerializer.Serialize(database);
-            File.WriteAllText(database.DatabasePath, json);
+            TSQLprovider.UpdateOrCreateDb(json);
         }
 
         public void SerialiseTable(Table table)
