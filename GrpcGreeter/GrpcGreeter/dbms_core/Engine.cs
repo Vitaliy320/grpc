@@ -38,13 +38,13 @@ namespace dbms_core
         public void SetServerDatabase(string dbName)
         {
             string dbPath = constants.path + dbName + constants.backSlash + dbName + constants.databaseExtension;
-            database = storageManager.GetDatabaseFromPath(dbPath);
+            database = storageManager.GetDatabaseFromPath(dbName, dbPath);
         }
 
-        public void SetServerTable(string tableName)
+        public void SetServerTable(string dbname, string tableName)
         {
             string tablePath = constants.path + database.DatabaseName + constants.backSlash + tableName + constants.tableExtension;
-            currentTable = storageManager.GetSelectedTable(tablePath);
+            currentTable = storageManager.GetSelectedTable(database.DatabaseName, tableName, tablePath);
         }
 
         public void SetIntersectionTable(string tableName)
