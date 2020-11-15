@@ -31,7 +31,7 @@ namespace dbms_core
             File.WriteAllText(database.DatabasePath, json);
         }
 
-        public void SerialiseTable(Table table)
+        public void SerialiseTable(Table table, string dbName)
         {
             var json = JsonSerializer.Serialize(table);
             File.WriteAllText(table.TablePath, json);
