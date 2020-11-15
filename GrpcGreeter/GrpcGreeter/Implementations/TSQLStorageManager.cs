@@ -11,19 +11,16 @@ namespace GrpcGreeter.Implementations
     public class TSQLStorageManager : IStorageManager
     {
 
-        private string _server;
-        private string _db;
-        private string _table;
+        private TSQLprovider TSQLprovider;
 
-        private string _tableNameForDbTable;
 
-        private string _connectionString =>
-            $"Server={_server};Database={_db};Trusted_Connection=True;Integrated Security=SSPI;MultipleActiveResultSets=true";
 
         public Table GetSelectedTable(string name)
         {
-            Table currentTable = JsonSerializer.Deserialize<Table>();
-            return currentTable;
+            //Table currentTable = JsonSerializer.Deserialize<Table>();
+            //return currentTable;
+
+            throw new NotImplementedException();
         }
 
         public Database GetDatabaseFromPath(string path)

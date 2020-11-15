@@ -10,5 +10,6 @@ namespace dbms_core
         public string databaseExtension = ".db";
         public string tableExtension = ".tabl";
         public string path = @"C:\University\IT\dbms_core\databases\";
+        public static string ServerAddress = @"DESKTOP-3NP2KFD\SQLEXPRESS";
     }
 }

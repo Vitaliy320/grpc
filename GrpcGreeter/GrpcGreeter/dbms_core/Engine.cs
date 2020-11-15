@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrpcGreeter;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -12,7 +13,7 @@ namespace dbms_core
     class Engine
     {
         Database database;
-        StorageManager storageManager = new StorageManager();
+        IStorageManager storageManager = new FileStorageManager();
 
         Table currentTable;
         Table intersectionTable = new Table();
