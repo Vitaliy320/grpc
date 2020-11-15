@@ -43,10 +43,12 @@ namespace GrpcGreeter.Implementations
             TSQLprovider.UpdateOrCreateDb(json);
         }
 
-        public void SerialiseTable(Table table)
+        public void SerialiseTable(Table table, string dbName)
         {
+            TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, dbName, table.TableName);
             var json = JsonSerializer.Serialize(table);
-            File.WriteAllText(table.TablePath, json);
+            TSQLprovider.ClearTable();
+            TSQLprovider.InsertData(new List<string> { json });
         }
     }
 }
