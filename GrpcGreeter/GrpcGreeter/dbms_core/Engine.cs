@@ -66,7 +66,7 @@ namespace dbms_core
             database.AddTable(table);
 
 
-            storageManager.SerialiseTable(table);
+            storageManager.SerialiseTable(table, database.DatabaseName);
             storageManager.SerialiseDatabase(database);
         }
 
@@ -110,7 +110,7 @@ namespace dbms_core
                 currentTable.columns.Add(column);
             }
 
-            storageManager.SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable, database.DatabaseName);
 
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
@@ -185,7 +185,7 @@ namespace dbms_core
             //var jsonTable = JsonSerializer.Serialize(intersectionTable);
             //File.WriteAllText(intersectionTable.TablePath, jsonTable);
 
-            storageManager.SerialiseTable(intersectionTable);
+            storageManager.SerialiseTable(intersectionTable, database.DatabaseName);
 
             database.AddTable(intersectionTable);
 
@@ -244,7 +244,7 @@ namespace dbms_core
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
 
-            storageManager.SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable, database.DatabaseName);
 
             return currentTable.columns.Count();
         }
@@ -281,7 +281,7 @@ namespace dbms_core
         {
             currentTable.RowsList.Add(row);
 
-            storageManager.SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable, database.DatabaseName);
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
         }
@@ -304,7 +304,7 @@ namespace dbms_core
         {
             currentTable.RowsList.Add(cellList);
 
-            storageManager.SerialiseTable(currentTable);
+            storageManager.SerialiseTable(currentTable, database.DatabaseName);
             //var jsonTable = JsonSerializer.Serialize(currentTable);
             //File.WriteAllText(currentTable.TablePath, jsonTable);
         }
