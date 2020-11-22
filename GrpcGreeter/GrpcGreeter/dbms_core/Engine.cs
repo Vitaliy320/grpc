@@ -7,13 +7,14 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
+using GrpcGreeter.Implementations;
 
 namespace dbms_core
 {
     class Engine
     {
         Database database;
-        IStorageManager storageManager = new FileStorageManager();
+        IStorageManager storageManager = new MongoManager();
 
         Table currentTable;
         Table intersectionTable = new Table();
@@ -73,8 +74,7 @@ namespace dbms_core
         public void DeleteTableFromName(string tableName)
         {
             string tablePath = constants.path + database.DatabaseName + constants.backSlash + tableName + constants.tableExtension;
-             
-            File.Delete(tablePath);
+            storageManager.DeleteTableFromName(tableName, database.DatabaseName);
              
             database.Tables.RemoveAll(t => t.TableName == tableName);
 

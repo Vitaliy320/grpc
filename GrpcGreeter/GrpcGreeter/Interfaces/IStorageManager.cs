@@ -15,5 +15,7 @@ namespace GrpcGreeter
         void SerialiseDatabase(Database database);
 
         void SerialiseTable(Table table, string dbName);
+
+        void DeleteTableFromName(string tanleName, string dbName);
     }
 }

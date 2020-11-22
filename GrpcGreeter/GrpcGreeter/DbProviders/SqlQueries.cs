@@ -33,7 +33,16 @@ namespace GrpcGreeter.DbProviders
 	                                                    EXEC(@sql)
                                                     END";
 
-        public const string TruncateTable = "TRUNCATE TABLE {0}";
+        public const string TruncateTable = @"DECLARE @tableName nvarchar(128)
+                                                    SET @tableName = N'{0}'
+
+                                                    IF(EXISTS (SELECT*
+                                                                     FROM INFORMATION_SCHEMA.TABLES
+                                                                     WHERE TABLE_SCHEMA = 'dbo'
+                                                                     AND TABLE_NAME = @tableName))
+                                                    BEGIN
+                                                        TRUNCATE TABLE {0}
+                                                    END";
 
         public const string Insert = @"INSERT INTO {0}
                                         VALUES {1}";

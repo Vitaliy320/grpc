@@ -36,5 +36,13 @@ namespace dbms_core
             var json = JsonSerializer.Serialize(table);
             File.WriteAllText(table.TablePath, json);
         }
+
+        public void DeleteTableFromName(string tableName, string dbName)
+        {
+            Constants constants = new Constants();
+            string tablePath = constants.path + dbName + constants.backSlash + tableName + constants.tableExtension;
+
+            File.Delete(tablePath);
+        }
     }
 }

@@ -11,10 +11,6 @@ namespace GrpcGreeter.Implementations
     public class TSQLStorageManager : IStorageManager
     {
 
-        
-
-
-
         public Table GetSelectedTable(string dbname, string tablename, string name)
         {
             TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, dbname, tablename);
@@ -24,8 +20,6 @@ namespace GrpcGreeter.Implementations
 
         public Database GetDatabaseFromPath(string dbname, string path)
         {
-
-
             TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, dbname);
             
 
@@ -48,7 +42,15 @@ namespace GrpcGreeter.Implementations
             TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, dbName, table.TableName);
             var json = JsonSerializer.Serialize(table);
             TSQLprovider.ClearTable();
+            TSQLprovider.CreateTable();
             TSQLprovider.InsertData(new List<string> { json });
         }
+
+        public void DeleteTableFromName(string tableName, string dbName)
+        {
+            TSQLprovider TSQLprovider = new TSQLprovider(Constants.ServerAddress, dbName, tableName);
+            TSQLprovider.DeleteTable();
+        }
+        
     }
 }

@@ -10,6 +10,7 @@ namespace dbms_core
         public string databaseExtension = ".db";
         public string tableExtension = ".tabl";
         public string path = @"C:\University\IT\dbms_core\databases\";
-        public static string ServerAddress = @"DESKTOP-3NP2KFD\SQLEXPRESS";
+        //public static string ServerAddress = @"DESKTOP-E5JN1AA\SQLEXPRESS01";
+        public static string ServerAddress = @"mongodb://localhost:27017";
     }
 }
